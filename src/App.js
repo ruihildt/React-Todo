@@ -1,6 +1,8 @@
 import React from 'react';
 import uuid from 'uuid';
 
+import TodoAdder from './components/TodoComponents/TodoForm';
+
 const inititalTodoList = [{
     task: 'Organize Garage',
     id: 1528817077286,
@@ -38,9 +40,10 @@ class App extends React.Component {
       completed: false,
     }
 
-    this.setState({
-      todoList: this.state.todoList.concat(newTodo),
-    });
+    this.setState( st => ({
+      todoList: st.todoList.concat(newTodo),
+      todoName: '',
+    }));
   }
 
   render() {
@@ -54,12 +57,12 @@ class App extends React.Component {
           ))
         }
 
-        <input
-        value={this.state.todoName}
-        onChange={this.changeHandler}
-        type="text"></input>
+        <TodoAdder
+          todoName={this.state.todoName}
+          changeHandler={this.state.changeHandler}
+          addTodo={this.state.addTodo}
+        />
 
-        <button onClick={this.addTodo}>Add task</button>
       </div>
     );
   }
