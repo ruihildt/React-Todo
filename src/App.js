@@ -59,8 +59,8 @@ class App extends React.Component {
 
         <TodoAdder
           todoName={this.state.todoName}
-          changeHandler={this.state.changeHandler}
-          addTodo={this.state.addTodo}
+          changeHandler={this.changeHandler}
+          addTodo={this.addTodo}
         />
 
       </div>
