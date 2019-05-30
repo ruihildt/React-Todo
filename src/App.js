@@ -4,14 +4,9 @@ import uuid from 'uuid';
 import TodoAdder from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 
-const inititalTodoList = [{
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
+const initialTodoList = [{
+    task: '',
+    id: '',
     completed: false
   }
 ];
@@ -21,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: inititalTodoList,
+      todoList: initialTodoList,
       todoName:'',
     };
   }
@@ -32,6 +27,17 @@ class App extends React.Component {
 
   changeHandler = (event) => {
     this.setState({ todoName: event.target.value });
+  }
+
+  completeTodo = id => {
+    this.setState(currentState => ({
+      todoList: currentState.todoList.map(todo => {
+        if (todo.id === id) {
+        todo.complete = todo.complete ? false : true;
+        }
+        return todo;
+      }),
+    }));
   }
 
   addTodo = () => {
@@ -49,7 +55,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="todo-container">
+      <div>
         <h3>Tasks list</h3>
 
         <TodoList

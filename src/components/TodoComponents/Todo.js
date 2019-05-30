@@ -1,9 +1,26 @@
 import React from 'react';
 
-function TodoList({todoObj}) {
+export default function TodoList({
+        todo,
+        completeTodo
+    }) {
+
+        const onCompleteTodo = event => {
+            // Error on this line "completeTodo is not a function"
+            completeTodo(todo.id);
+        }
+
+        const todoStyle = {
+            textDecoration: todo.completed ? 'line-through' : 'initial',
+        }
+
     return (
-        <div key={todoObj.id}>{todoObj.task}</div>
+        <div 
+        key={todo.id}
+        style={todoStyle}
+        onClick={onCompleteTodo}
+        >
+        {todo.task}
+        </div>
         )
 }
-
-export default TodoList;

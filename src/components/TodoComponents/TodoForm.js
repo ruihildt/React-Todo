@@ -1,6 +1,11 @@
 import React from 'react';
 
-function TodoAdder({todoName, changeHandler, addTodo}) {
+export default function TodoAdder({
+        todoName,
+        changeHandler,
+        addTodo
+    }) {
+
     return (
         <div>
             <input
@@ -13,5 +18,3 @@ function TodoAdder({todoName, changeHandler, addTodo}) {
         </div>
     );
 }
-
-export default TodoAdder;
