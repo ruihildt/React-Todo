@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid';
 
 const inititalTodoList = [{
     task: 'Organize Garage',
@@ -17,25 +18,48 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todosList: inititalTodoList,
+      todoList: inititalTodoList,
+      todoName:'',
     };
   }
 
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
+
+  changeHandler = (event) => {
+    this.setState({ todoName: event.target.value });
+  }
+
+  addTodo = () => {
+    const newTodo = {
+      task: this.state.todoName,
+      id: uuid(),
+      completed: false,
+    }
+
+    this.setState({
+      todoList: this.state.todoList.concat(newTodo),
+    });
+  }
+
   render() {
     return (
       <div className="todo-container">
-        <h3>Tasks list</h3> {
-          this.state.todosList.map(todoObj => {
-            return (
-            <div key={todoObj.id}>
-              {todoObj.task}
-            </div>
-            )
-          })
+        <h3>Tasks list</h3>
+
+        {
+          this.state.todoList.map(todoObj => (
+            <div key={todoObj.id}>{todoObj.task}</div>
+          ))
         }
+
+        <input
+        value={this.state.todoName}
+        onChange={this.changeHandler}
+        type="text"></input>
+
+        <button onClick={this.addTodo}>Add task</button>
       </div>
     );
   }
