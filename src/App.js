@@ -2,6 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 
 import TodoAdder from './components/TodoComponents/TodoForm';
+import TodoList from './components/TodoComponents/TodoList';
 
 const inititalTodoList = [{
     task: 'Organize Garage',
@@ -51,11 +52,9 @@ class App extends React.Component {
       <div className="todo-container">
         <h3>Tasks list</h3>
 
-        {
-          this.state.todoList.map(todoObj => (
-            <div key={todoObj.id}>{todoObj.task}</div>
-          ))
-        }
+        <TodoList
+        todoList ={this.state.todoList}
+        />
 
         <TodoAdder
           todoName={this.state.todoName}
